@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  nginx:
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+    networks:
+      - network
+  
+  php:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+    image: php:8.1-apache
+    container_name: php
+    networks:
+      - network
+
+  mysql:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - network
+
+volumes:
+  mysql-data:
+
+networks: 
+  network:
+    name: network
