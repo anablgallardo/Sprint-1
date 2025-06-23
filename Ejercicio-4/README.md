@@ -9,7 +9,7 @@ El objetivo es crear una aplicación web con PHP utilizando Nginx como servidor 
 ## Estructura
 Nuestro ejercicio va a tener la siguiente estructura de archivos y carpetas:
 
-├── Ejercicio-4
+├── Ejercicio-4/
 │   ├── docker-compose.yml
 │   ├── README.md
 │   └── www       
